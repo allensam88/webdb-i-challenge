@@ -24,7 +24,11 @@ router.get('/:id', (req, res) => {
         .where({ id: req.params.id })
         .first()
         .then(account => {
-            res.status(200).json(account)
+            if (!account) {
+                res.status(404).json({ message: 'record not found' })
+            } else {
+                res.status(200).json(account)
+            }
         })
         .catch(error => {
             console.log(error);
@@ -61,7 +65,7 @@ router.put('/:id', (req, res) => {
             if (count > 0) {
                 res.status(200).json({ message: `${count} record(s) updated` })
             } else {
-                res.status(404).json({ message: 'record not found'})
+                res.status(404).json({ message: 'record not found' })
             }
         })
         .catch(error => {
@@ -76,7 +80,11 @@ router.delete('/:id', (req, res) => {
         .where({ id })
         .del()
         .then(count => {
-            res.status(200).json({ message: `${count} record(s) deleted` })
+            if (count > 0) {
+                res.status(200).json({ message: `${count} record(s) deleted` })
+            } else {
+                res.status(404).json({ message: 'record not found' })
+            }
         })
         .catch(error => {
             console.log(error);

@@ -23,7 +23,7 @@ LIMIT 10
 
 -- Find all customers that live in London, Madrid, or Brazil
 SELECT * FROM [Customers]
-WHERE City = 'London' OR City = 'Madrid' OR Country = 'Brazil'
+WHERE City = 'London' OR 'Madrid' OR Country = 'Brazil'
 --number of records returned: 18
 
 
